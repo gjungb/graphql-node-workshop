@@ -21,6 +21,6 @@ app
     resolvers,
     graphiql: true
   })
-  .listen(3000)
+  .listen(4000)
   .then((address) => console.log(`${address}/graphiql`))
   .catch((err) => console.error(err));
