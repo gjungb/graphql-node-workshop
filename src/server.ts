@@ -1,26 +1,21 @@
-import Fastify from "fastify";
+import fastify from "fastify";
 import mercurius from "mercurius";
+import "reflect-metadata";
+import { buildSchema } from "type-graphql";
+import { RecipeResolver } from "./recipe";
 
-const app = Fastify();
+async function main() {
+  // build TypeGraphQL executable schema
+  const schema = await buildSchema({
+    resolvers: [RecipeResolver],
+  });
 
-const schema = `
-  type Query {
-    add(x: Int, y: Int): Int
-  }
-`;
+  fastify()
+    .register(mercurius, {
+      schema,
+      graphiql: true,
+    })
+    .listen(4000);
+}
 
-const resolvers = {
-  Query: {
-    add: async (_: any, { x, y }: any) => x + y,
-  },
-};
-
-app
-  .register(mercurius, {
-    schema,
-    resolvers,
-    graphiql: true
-  })
-  .listen(4000)
-  .then((address) => console.log(`${address}/graphiql`))
-  .catch((err) => console.error(err));
+main().catch(console.error);
