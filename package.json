@@ -10,9 +10,12 @@
   "author": "Gerd Jungbluth <gerd.jungbluth@engawa.de>",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
     "fastify": "3.24.1",
+    "fastify-cors": "^6.0.2",
     "graphql": "15.8.0",
     "mercurius": "8.12.0",
+    "node-fetch": "^3.1.0",
     "reflect-metadata": "0.1.13",
     "tslib": "2.3.1",
     "type-graphql": "1.1.1"

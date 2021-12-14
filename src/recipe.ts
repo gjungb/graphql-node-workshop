@@ -1,12 +1,14 @@
 // recipe.ts
 import {
     Arg,
-    Field, Int, ObjectType, Query, Resolver
+    Field, Float, Int, ObjectType, Query, Resolver
 } from "type-graphql";
 
 @ObjectType({ description: "Object representing cooking recipe" })
 export class Recipe {
-  @Field()
+  @Field({
+    description: "A useful title"
+  })
   title!: string;
 
   @Field(() => String, {
@@ -23,7 +25,7 @@ export class Recipe {
   })
   description?: string;
 
-  @Field(() => [Int])
+  @Field(() => [Float])
   ratings!: number[];
 
   @Field()
@@ -32,6 +34,7 @@ export class Recipe {
 
 @Resolver()
 export class RecipeResolver {
+
   @Query(() => Recipe, { nullable: true })
   async recipe(
     @Arg("title") title: string
